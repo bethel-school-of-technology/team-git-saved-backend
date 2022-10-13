@@ -26,7 +26,7 @@ export function HouseholdFactory(sequelize: Sequelize) {
         }
     },   {
         freezeTableName: true,
-        tableName: "hosuehold",
+        tableName: "household",
         sequelize
     });
 
