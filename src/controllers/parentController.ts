@@ -13,7 +13,7 @@ export const getAllParents: RequestHandler = async (req, res) => {
     // res.status(200).json(parentsFound)
 
 }
-
+//just testing with GitHub
 
 // get parent by id
 
