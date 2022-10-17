@@ -1,98 +1,81 @@
 import { RequestHandler } from "express";
-import { Parents } from "../models/parent"; 
+import { Parents } from "../models/parent";
 
+export const defaultParent: RequestHandler = (req, res, next) => {
+  res.redirect("/parents");
+};
 
 // get all parents
-
 export const getAllParents: RequestHandler = async (req, res) => {
-    Parents.findAll().then(response => {
-        res.status(200).json(response)
-    })
+  Parents.findAll().then((response) => {
+    res.status(200).json(response);
+  });
 
-    // let parentsFound = await Parents.findAll();
-    // res.status(200).json(parentsFound)
-
-}
-//just testing with GitHub
+  // let parentsFound = await Parents.findAll();
+  // res.status(200).json(parentsFound)
+};
 
 // get parent by id
-
 export const getParent: RequestHandler = async (req, res) => {
-    let parentId = req.params.id;
+  let itemId = req.params.parentId;
 
-    let parentFound = await Parents.findByPk(parentId).then(response => {
-        res.status(200).json(parentFound)
-    })
+  let parentItem: Parents | null = await Parents.findByPk(itemId);
 
-
-}
-
+  if (parentItem) {
+    res.status(200).json(parentItem);
+  } else {
+    res.status(404);
+  }
+};
 
 // create parent
 export const createParent: RequestHandler = async (req, res) => {
+  let parent: Parents = req.body;
+  await Parents.create(parent).then((response) => {
+    res.status(200).json(response);
+  });
 
-    let parent = req.body;
-
-
-    if (parent.title) {
-        try {
-            let created = await Parents.create(parent)
-            res.status(201).json(created)
-        } catch (err) {
-            res.status(400).send();
-        }
-    } else {
-        res.status(400).send();
-    }
-
-
-}
-
+  // if (parent.householdName) {
+  //   try {
+  //     let created = await Parents.create(parent);
+  //     res.status(201).json(created);
+  //   } catch (err) {
+  //     res.status(400).send();
+  //   }
+  // } else {
+  //   res.status(400).send();
+  // }
+};
 
 // delete parent
-export const deleteParent: RequestHandler =async (req, res) => {
+export const deleteParent: RequestHandler = async (req, res) => {
+  let itemId = req.params.parentId;
 
-    let parentId = req.params.id;
+  let deleted = await Parents.destroy({
+    where: { parentId: itemId },
+  });
 
-    let parentFound = await Parents.findByPk(parentId);
-
-    if (parentFound) {
-        await Parents.destroy({
-            where: { parentId: parentId}
-        }).then(response => {
-            res.status(200).json();
-        })
-    } else {
-        res.status(404).send();
-    }
-
-    
-}
-
+  if (deleted) {
+    res.redirect("/");
+  } else {
+    res.status(404);
+  }
+};
 
 // update to update completed Parent
+export const updateParent: RequestHandler = async (req, res) => {
+  let itemId = req.params.parentId;
+  let taskBody: Parents = req.body;
 
+  let [parentFound] = await Parents.update(taskBody, {
+    where: { parentId: itemId },
+  });
 
-export const updateParent: RequestHandler =async (req, res) => {
+  // console.log(parentFound);
 
-    let parentId = req.params.id;
-    let taskBody = req.body;
-
-    let parentFound = await Parents.findByPk(parentId);
-// console.log(parentFound);
-
-    if (parentFound) {
-        await Parents.update(taskBody, {
-            where: {
-                parentId: parentId
-            }
-        }).then(response => {
-            res.status(200).send(response)
-        })
-    } else {
-        res.status(404).send();
-    }
-
-
-    
-}
+  if (parentFound) {
+    res.status(204).send();
+  } else {
+    res.status(404).send();
+  }
+};
