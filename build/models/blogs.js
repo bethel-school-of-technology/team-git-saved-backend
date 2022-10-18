@@ -28,3 +28,4 @@ function BlogFactory(sequelize) {
     });
 }
 exports.BlogFactory = BlogFactory;
+;
