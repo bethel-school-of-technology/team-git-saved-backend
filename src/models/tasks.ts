@@ -6,6 +6,7 @@ export class Tasks extends Model<InferCreationAttributes<Tasks>, InferCreationAt
     declare pointValue: number
     declare assignedTo: string;
     declare completed: boolean;
+    declare testing: boolean;
 }
 
 
@@ -23,13 +24,17 @@ export function TaskFactory(sequelize: Sequelize) {
         },
         pointValue: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         assignedTo: {
             type: DataTypes.STRING,
             allowNull: true
         },
         completed: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        testing: {
             type: DataTypes.BOOLEAN,
             allowNull: true
         }
