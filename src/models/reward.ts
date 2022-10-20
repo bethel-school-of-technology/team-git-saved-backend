@@ -1,18 +1,16 @@
 import { DataTypes, InferCreationAttributes, Model, Sequelize } from "sequelize";
 
-export class Tasks extends Model<InferCreationAttributes<Tasks>, InferCreationAttributes<Tasks>> {
-    declare taskId: number;
+export class Rewards extends Model<InferCreationAttributes<Rewards>, InferCreationAttributes<Rewards>> {
+    declare rewardId: number;
     declare title: string;
     declare pointValue: number
-    declare assignedTo: string;
     declare completed: boolean;
-    declare testing: boolean;
 }
 
 
-export function TaskFactory(sequelize: Sequelize) {
-    Tasks.init({
-        taskId: {
+export function RewardFactory(sequelize: Sequelize) {
+    Rewards.init({
+        rewardId: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
@@ -26,21 +24,13 @@ export function TaskFactory(sequelize: Sequelize) {
             type: DataTypes.INTEGER,
             allowNull: true
         },
-        assignedTo: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
         completed: {
-            type: DataTypes.BOOLEAN,
-            allowNull: true
-        },
-        testing: {
             type: DataTypes.BOOLEAN,
             allowNull: true
         }
     }, {
         freezeTableName: true,
-        tableName: "tasks",
+        tableName: "rewards",
         sequelize
     });
 

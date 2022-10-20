@@ -1,9 +1,9 @@
 import { Sequelize } from "sequelize";
 import { ChildrenFactory } from "./children";
-import { HouseholdFactory } from "./household";
 import { ParentFactory } from "./parent";
 import { TaskFactory } from "./tasks";
 import { BlogFactory } from "./blogs";
+import { HouseholdFactory } from "./household";
 
 const dbName = 'hometasticDb';
 const username = 'root';
