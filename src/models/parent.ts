@@ -7,6 +7,7 @@ export class Parents extends Model<InferCreationAttributes<Parents>, InferCreati
     declare name: string;
     declare email: string;
     declare familySize: number;
+    
 }
 
 
@@ -20,10 +21,10 @@ export function ParentFactory(sequelize: Sequelize) {
         },
         householdName: {
             type: DataTypes.STRING,
-            references: {       //This is referencing the household model => column-'name'
-                model: Household,
-                key:'name'
-            },
+            // references: {       //This is referencing the household model => column-'name'
+            //     model: Household,
+            //     key:'name'
+            // },
             allowNull: true,
         },
         name: {
@@ -36,10 +37,10 @@ export function ParentFactory(sequelize: Sequelize) {
         },
         familySize: {
             type: DataTypes.INTEGER,
-            references: {       //This is referencing the household model => column-'size'
-                model: Household,
-                key:'size'
-            },
+            // references: {       //This is referencing the household model => column-'size'
+            //     model: Household,
+            //     key:'size'
+            // },
             allowNull: true
         }
     }, {

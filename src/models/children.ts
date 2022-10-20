@@ -20,10 +20,10 @@ export function ChildrenFactory(sequelize: Sequelize) {
         },
         householdName: {
             type: DataTypes.STRING,
-            references: {       //This is referencing the household model => column-'name'
-                model: Household,
-                key:'name'
-            },
+            // references: {       //This is referencing the household model => column-'name'
+            //     model: Household,
+            //     key:'name'
+            // },
             allowNull: true,
         },
         name: {
