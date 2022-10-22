@@ -16,7 +16,10 @@ export class Parents extends Model<
   declare name: string;
   declare email: string;
   declare familySize: number;
-  // declare password: string;
+  declare username: string;
+  declare password: string;
+  declare firstName: string;
+  declare lastName: string;
   declare createdAt?: Date;
   declare updatedAt?: Date;
 }
@@ -56,10 +59,22 @@ export function ParentFactory(sequelize: Sequelize) {
         // },
         allowNull: true,
       },
-      // password: {
-      //   type: DataTypes.STRING,
-      //   allowNull: false,
-      // },
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
