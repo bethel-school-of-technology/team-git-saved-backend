@@ -1,4 +1,3 @@
-import { triggerAsyncId } from "async_hooks";
 import express, { NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 import path from "path";

@@ -1,5 +1,10 @@
 import { RequestHandler } from "express";
 import { Parents } from "../models/parent";
+import {
+  comparePasswords,
+  hashPassword,
+  signUserToken,
+} from "../services/auth";
 
 export const defaultParent: RequestHandler = (req, res, next) => {
   res.redirect("/parents");
@@ -31,20 +36,18 @@ export const getParent: RequestHandler = async (req, res) => {
 // create parent
 export const createParent: RequestHandler = async (req, res) => {
   let parent: Parents = req.body;
-  await Parents.create(parent).then((response) => {
-    res.status(200).json(response);
-  });
 
-  // if (parent.householdName) {
-  //   try {
-  //     let created = await Parents.create(parent);
-  //     res.status(201).json(created);
-  //   } catch (err) {
-  //     res.status(400).send();
-  //   }
-  // } else {
-  //   res.status(400).send();
-  // }
+  if (parent.username && parent.password) {
+    let hashedPassword = await hashPassword(parent.password);
+    parent.password = hashedPassword;
+    let created = await Parents.create(parent);
+    res.status(201).json({
+      username: created.username,
+      parentId: created.parentId,
+    });
+  } else {
+    res.status(400).send("Username and password required");
+  }
 };
 
 // delete parent
@@ -71,11 +74,35 @@ export const updateParent: RequestHandler = async (req, res) => {
     where: { parentId: itemId },
   });
 
-  // console.log(parentFound);
-
   if (parentFound) {
     res.status(204).send();
   } else {
     res.status(404).send();
+  }
+};
+
+//login Parent
+export const loginParent: RequestHandler = async (req, res, next) => {
+  // Look up user by their username
+  let existingParent: Parents | null = await Parents.findOne({
+    where: { username: req.body.username },
+  });
+
+  // If user exists, check that password matches
+  if (existingParent) {
+    let passwordsMatch = await comparePasswords(
+      req.body.password,
+      existingParent.password
+    );
+
+    // If passwords match, create a JWT
+    if (passwordsMatch) {
+      let token = await signUserToken(existingParent);
+      res.status(200).json({ token });
+    } else {
+      res.status(401).json("Invalid password");
+    }
+  } else {
+    res.status(401).json("Invalid username");
   }
 };
