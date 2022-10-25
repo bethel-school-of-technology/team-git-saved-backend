@@ -4,6 +4,8 @@ import { Household } from "./household";
 export class Parents extends Model<InferCreationAttributes<Parents>, InferCreationAttributes<Parents>> {
     declare parentId: number;
     declare householdName: string;
+    declare username: string;
+    declare password: string;
     declare name: string;
     declare email: string;
     declare familySize: number;
@@ -26,6 +28,16 @@ export function ParentFactory(sequelize: Sequelize) {
             //     key:'name'
             // },
             allowNull: true,
+        },
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+    
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
         name: {
             type: DataTypes.STRING,

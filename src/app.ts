@@ -5,12 +5,17 @@ import taskRoutes from './routes/tasks';
 import parentRoutes from './routes/parent';
 import childRoutes from './routes/children';
 import householdRoutes from './routes/household';
-
+import rewardRoutes from './routes/rewards';
 import express, { NextFunction, Request, Response } from 'express'
-const { Sequelize } = require('sequelize');
+
 const cors = require("cors");
+const corsOptions = {
+    origin: [ 'http://localhost:3000', 'http://localhost:3001' ]
+};
 
 const app = express();
+
+app.use(cors(corsOptions));
 
 app.use(morgan('dev'))
 
@@ -22,6 +27,7 @@ app.use('/tasks', taskRoutes)
 app.use('/parents', parentRoutes)
 app.use('/children', childRoutes)
 app.use('/household', householdRoutes)
+app.use('./rewards', rewardRoutes)
 
 app.use((req: Request, res: Response, next: NextFunction) => {
     res.status(404).end();

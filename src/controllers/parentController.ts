@@ -21,7 +21,7 @@ export const getParent: RequestHandler = async (req, res) => {
     let parentId = req.params.id;
 
     let parentFound = await Parents.findByPk(parentId).then(response => {
-        res.status(200).json(parentFound)
+        res.status(200).json(response)
     })
 
 
@@ -34,7 +34,7 @@ export const createParent: RequestHandler = async (req, res) => {
     let parent = req.body;
 
 
-    if (parent.title) {
+    if (parent.name) {
         try {
             let created = await Parents.create(parent)
             res.status(201).json(created)
