@@ -1,8 +1,9 @@
 import { Sequelize } from "sequelize";
-import { ChildrenFactory } from "./children";
-import { ParentFactory } from "./parent";
-import { TaskFactory } from "./tasks";
+import { User, UserFactory } from "./user";
+import { TaskFactory, Tasks } from "./tasks";
 import { HouseholdFactory } from "./household";
+import { DiscussionFactory } from "./discussion";
+import { RewardFactory } from "./reward";
 
 const dbName = 'hometasticDb';
 const username = 'root';
@@ -15,9 +16,15 @@ const sequelize = new Sequelize(dbName, username, password, {
 });
 
 TaskFactory(sequelize);
-ParentFactory(sequelize);
-ChildrenFactory(sequelize);
+UserFactory(sequelize);
 HouseholdFactory(sequelize);
+DiscussionFactory(sequelize);
+RewardFactory(sequelize);
+
+User.hasMany(Tasks, {
+    foreignKey: 'taskId'
+  });
+  Tasks.belongsTo(User);
 
 
 export const db = sequelize;
