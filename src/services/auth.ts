@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import { Request } from "express";
 import jwt from "jsonwebtoken";
 import { Parents } from "../models/parent";
 
@@ -23,4 +24,24 @@ export const signUserToken = async (user: Parents) => {
   });
 
   return token;
+};
+
+export const verifyUser = async (req: Request) => {
+  // Get the Authorization header from the request
+  const authHeader = req.headers.authorization;
+
+  // If header exists, parse token from `Bearer <token>`
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
+
+    // Verify the token and get the user
+    try {
+      let decoded: any = await jwt.verify(token, secret);
+      return Parents.findByPk(decoded.parentId);
+    } catch (err) {
+      return null;
+    }
+  } else {
+    return null;
+  }
 };
