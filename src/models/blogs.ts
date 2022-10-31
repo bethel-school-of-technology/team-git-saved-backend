@@ -1,22 +1,18 @@
 import { 
     DataTypes, 
-    InferAttributes, 
     InferCreationAttributes, 
     Model, 
     Sequelize } from "sequelize";
-import { DataType } from "sequelize-typescript";
 
-export class Discussion extends Model<InferAttributes<Discussion>, InferCreationAttributes<Discussion>> {
-    declare discussionId: number;
+export class Blogs extends Model<InferCreationAttributes<Blogs>, InferCreationAttributes<Blogs>> {
+    declare blogId: number;
     declare headline: string;
     declare content: string;
-    declare user: string;
 }
 
-
-export function DiscussionFactory(sequelize: Sequelize) {
-    Discussion.init ({
-        discussionId: {
+export function BlogFactory(sequelize: Sequelize) {
+    Blogs.init ({
+        blogId: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
@@ -29,16 +25,11 @@ export function DiscussionFactory(sequelize: Sequelize) {
         content: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        user: {
-            type: DataType.STRING,
-            allowNull: false
         }
     },
-    
      {
         freezeTableName: true,
-        tableName: "discussion",
+        tableName: "blogs",
         sequelize
     
     });

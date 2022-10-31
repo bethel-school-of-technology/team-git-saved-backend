@@ -1,6 +1,6 @@
-import { DataTypes, InferAttributes, InferCreationAttributes, Model, Sequelize } from "sequelize";
+import { DataTypes, InferCreationAttributes, Model, Sequelize } from "sequelize";
 
-export class Household extends Model<InferAttributes<Household>, InferCreationAttributes<Household>> {
+export class Household extends Model<InferCreationAttributes<Household>, InferCreationAttributes<Household>> {
     declare householdId: number;
     declare name: string;
     declare size: number;
