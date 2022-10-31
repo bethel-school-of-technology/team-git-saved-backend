@@ -1,12 +1,13 @@
 import {
   DataTypes,
+  InferAttributes,
   InferCreationAttributes,
   Model,
   Sequelize,
 } from "sequelize";
 
 export class Household extends Model<
-  InferCreationAttributes<Household>,
+  InferAttributes<Household>,
   InferCreationAttributes<Household>
 > {
   declare householdId: number;
