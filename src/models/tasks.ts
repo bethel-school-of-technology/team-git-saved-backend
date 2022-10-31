@@ -1,12 +1,11 @@
-import { DataTypes, InferCreationAttributes, Model, Sequelize } from "sequelize";
+import { DataTypes, InferAttributes, InferCreationAttributes, Model, Sequelize } from "sequelize";
 
-export class Tasks extends Model<InferCreationAttributes<Tasks>, InferCreationAttributes<Tasks>> {
+export class Tasks extends Model<InferAttributes<Tasks>, InferCreationAttributes<Tasks>> {
     declare taskId: number;
     declare title: string;
     declare pointValue: number
-    declare assignedTo: string;
     declare completed: boolean;
-    declare testing: boolean;
+    
 }
 
 
@@ -26,18 +25,12 @@ export function TaskFactory(sequelize: Sequelize) {
             type: DataTypes.INTEGER,
             allowNull: true
         },
-        assignedTo: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
+        
         completed: {
             type: DataTypes.BOOLEAN,
             allowNull: true
         },
-        testing: {
-            type: DataTypes.BOOLEAN,
-            allowNull: true
-        }
+        
     }, {
         freezeTableName: true,
         tableName: "tasks",

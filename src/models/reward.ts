@@ -1,10 +1,11 @@
-import { DataTypes, InferCreationAttributes, Model, Sequelize } from "sequelize";
+import { DataTypes, InferAttributes, InferCreationAttributes, Model, Sequelize } from "sequelize";
 
-export class Rewards extends Model<InferCreationAttributes<Rewards>, InferCreationAttributes<Rewards>> {
+export class Rewards extends Model<InferAttributes<Rewards>, InferCreationAttributes<Rewards>> {
     declare rewardId: number;
     declare title: string;
     declare pointValue: number
-    declare completed: boolean;
+    declare redeemed: boolean;
+    declare redeemedBy: string;
 }
 
 
@@ -24,8 +25,12 @@ export function RewardFactory(sequelize: Sequelize) {
             type: DataTypes.INTEGER,
             allowNull: true
         },
-        completed: {
+        redeemed: {
             type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        redeemedBy: {
+            type: DataTypes.STRING,
             allowNull: true
         }
     }, {
