@@ -32,7 +32,7 @@ export function DiscussionFactory(sequelize: Sequelize) {
         },
         user: {
             type: DataType.STRING,
-            allowNull: false
+            allowNull: true
         }
     },
     

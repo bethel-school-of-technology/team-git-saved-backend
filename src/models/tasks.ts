@@ -28,7 +28,8 @@ export function TaskFactory(sequelize: Sequelize) {
         
         completed: {
             type: DataTypes.BOOLEAN,
-            allowNull: false
+            defaultValue: 0,
+            allowNull: true
         },
         
     }, {

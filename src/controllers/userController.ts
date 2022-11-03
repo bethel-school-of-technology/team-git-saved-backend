@@ -35,14 +35,16 @@ export const createUser: RequestHandler = async (req, res) => {
     let user = req.body;
 
 
-    if (user.name) {
+    if (user.username) {
         try {
             let created = await User.create(user)
             res.status(201).json(created)
         } catch (err) {
+            console.log(user)
             res.status(400).send();
         }
     } else {
+        
         res.status(400).send();
     }
 

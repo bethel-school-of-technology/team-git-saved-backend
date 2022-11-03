@@ -1,8 +1,7 @@
 import { DataTypes, InferAttributes, InferCreationAttributes, Model, Sequelize } from "sequelize";
 import { Household } from "./household";
-import { Tasks } from "./tasks";
 
-export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
+export class User extends Model<InferCreationAttributes<User>, InferCreationAttributes<User>> {
     declare userId: number;
     declare roleId: string;
     declare username: string;
@@ -27,7 +26,7 @@ export function UserFactory(sequelize: Sequelize) {
         },
         roleId: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         username: {
             type: DataTypes.STRING,
@@ -37,7 +36,7 @@ export function UserFactory(sequelize: Sequelize) {
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         name: {
             type: DataTypes.STRING,
@@ -67,10 +66,6 @@ export function UserFactory(sequelize: Sequelize) {
         sequelize
     });
     
-    User.hasMany(Tasks, {
-        foreignKey: 'taskId'
-      });
-      Tasks.belongsTo(User);
     
 
 
