@@ -8,7 +8,6 @@ export class Rewards extends Model<InferAttributes<Rewards>, InferCreationAttrib
     declare redeemedBy: string;
 }
 
-
 export function RewardFactory(sequelize: Sequelize) {
     Rewards.init({
         rewardId: {
@@ -41,5 +40,3 @@ export function RewardFactory(sequelize: Sequelize) {
 
 
 }
-
-

@@ -5,14 +5,14 @@ import { HouseholdFactory } from "./household";
 import { DiscussionFactory } from "./discussion";
 import { RewardFactory } from "./reward";
 
-const dbName = 'hometasticDb';
-const username = 'root';
-const password = 'password';
+const dbName = "hometasticDb";
+const username = "root";
+const password = "password";
 
 const sequelize = new Sequelize(dbName, username, password, {
-    host: 'localhost',
-    port: 3306,
-    dialect: 'mysql'
+  host: "localhost",
+  port: 3306,
+  dialect: "mysql",
 });
 
 TaskFactory(sequelize);

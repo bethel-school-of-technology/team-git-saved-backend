@@ -4,7 +4,6 @@ import {
     InferCreationAttributes, 
     Model, 
     Sequelize } from "sequelize";
-import { DataType } from "sequelize-typescript";
 
 export class Discussion extends Model<InferAttributes<Discussion>, InferCreationAttributes<Discussion>> {
     declare discussionId: number;
@@ -31,7 +30,7 @@ export function DiscussionFactory(sequelize: Sequelize) {
             allowNull: false
         },
         user: {
-            type: DataType.STRING,
+            type: DataTypes.STRING,
             allowNull: true
         }
     },

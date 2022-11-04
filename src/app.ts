@@ -1,4 +1,3 @@
-
 import { db } from './models/index'
 import morgan from 'morgan';
 import taskRoutes from './routes/taskRoutes';
@@ -7,6 +6,7 @@ import householdRoutes from './routes/householdRoutes';
 import rewardRoutes from './routes/rewardRoutes';
 import discussionRoutes from './routes/discussionRoutes'
 import express, { NextFunction, Request, Response } from 'express'
+const { Sequelize } = require("sequelize");
 
 const cors = require("cors");
 const corsOptions = {
@@ -20,7 +20,7 @@ app.use(cors(corsOptions));
 app.use(morgan('dev'))
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/tasks', taskRoutes)
@@ -30,13 +30,11 @@ app.use('/rewards', rewardRoutes)
 app.use('/discussion', discussionRoutes)
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-    res.status(404).end();
+  res.status(404).end();
 });
 
-db.sync({ alter: true }).then(() => {
-    console.log("connected to database")
-})
+db.sync().then(() => {
+  console.log("connected to database");
+});
 
-
-
-app.listen(3000);
+app.listen(3001);

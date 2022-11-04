@@ -8,7 +8,6 @@ export class Tasks extends Model<InferAttributes<Tasks>, InferCreationAttributes
     
 }
 
-
 export function TaskFactory(sequelize: Sequelize) {
     Tasks.init({
         taskId: {
@@ -40,5 +39,3 @@ export function TaskFactory(sequelize: Sequelize) {
 
 
 }
-
-
