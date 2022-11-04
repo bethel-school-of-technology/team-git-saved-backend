@@ -1,7 +1,8 @@
 import bcrypt from "bcrypt";
-import { Request } from "express";
 import jwt from "jsonwebtoken";
-import { Parents } from "../models/parent";
+import { User} from "../models/user";
+import { Request } from "express";
+
 
 const secret = "We R College Bethel";
 
@@ -18,8 +19,8 @@ export const comparePasswords = async (
   return await bcrypt.compare(plainTextPassword, hashPassword);
 };
 
-export const signUserToken = async (user: Parents) => {
-  let token = jwt.sign({ parentId: user.parentId }, secret, {
+export const signUserToken = async (user: User) => {
+  let token = jwt.sign({ userId: user.userId }, secret, {
     expiresIn: "1hr",
   });
 
@@ -37,7 +38,7 @@ export const verifyUser = async (req: Request) => {
     // Verify the token and get the user
     try {
       let decoded: any = await jwt.verify(token, secret);
-      return Parents.findByPk(decoded.parentId);
+      return User.findByPk(decoded.userId);
     } catch (err) {
       return null;
     }
