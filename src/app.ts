@@ -9,13 +9,11 @@ import express, { NextFunction, Request, Response } from 'express'
 const { Sequelize } = require("sequelize");
 
 const cors = require("cors");
-const corsOptions = {
-    origin: [ 'http://localhost:3001' ]
-};
+
 
 const app = express();
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(morgan('dev'))
 
