@@ -10,7 +10,7 @@ const { Sequelize } = require("sequelize");
 
 const cors = require("cors");
 const corsOptions = {
-    origin: [ 'http://localhost:3000' ]
+    origin: [ 'http://localhost:3001' ]
 };
 
 const app = express();
