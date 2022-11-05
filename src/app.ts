@@ -31,7 +31,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   res.status(404).end();
 });
 
-db.sync().then(() => {
+db.sync({alter: true}).then(() => {
   console.log("connected to database");
 });
 
