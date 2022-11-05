@@ -1,5 +1,7 @@
 import { RequestHandler } from "express";
 import { Tasks } from "../models/tasks";
+import { Users } from "../models/user";
+import { verifyUser } from "../services/auth";
 
 // get all tasks
 
@@ -22,17 +24,20 @@ export const getTask: RequestHandler = async (req, res) => {
   });
 };
 
-// create task
-export const createTask: RequestHandler = async (req, res) => {
-  let task = req.body;
+//Create Tasks
+export const createTask: RequestHandler = async (req, res, next) => {
+  let user: Users | null = await verifyUser(req);
 
-  if (task.title) {
-    try {
-      let created = await Tasks.create(task);
-      res.status(201).json(created);
-    } catch (err) {
-      res.status(400).send();
-    }
+  if (!user) {
+    return res.status(403).send();
+  }
+
+  let newTask: Tasks = req.body;
+  newTask.userId = user.userId;
+
+  if (newTask.title) {
+    let created = await Tasks.create(newTask);
+    res.status(201).json(created);
   } else {
     res.status(400).send();
   }
