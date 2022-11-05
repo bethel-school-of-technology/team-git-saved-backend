@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import { Tasks } from "../models/tasks";
-import { Users } from "../models/user";
+import { User } from "../models/user";
 import { verifyUser } from "../services/auth";
 
 // get all tasks
@@ -26,7 +26,7 @@ export const getTask: RequestHandler = async (req, res) => {
 
 //Create Tasks
 export const createTask: RequestHandler = async (req, res, next) => {
-  let user: Users | null = await verifyUser(req);
+  let user: User | null = await verifyUser(req);
 
   if (!user) {
     return res.status(403).send();
