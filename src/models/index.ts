@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize";
 import { User, UserFactory } from "./user";
 import { TaskFactory, AssociateUserTasks } from "./tasks";
 import { HouseholdFactory } from "./household";
-import { DiscussionFactory } from "./discussion";
+import { DiscussionFactory, AssociateUserDiscussion } from "./discussion";
 import { RewardFactory } from "./reward";
 
 const dbName = "hometasticDb";
@@ -21,6 +21,7 @@ HouseholdFactory(sequelize);
 DiscussionFactory(sequelize);
 RewardFactory(sequelize);
 AssociateUserTasks();
+AssociateUserDiscussion();
 
 // User.hasMany(Tasks, {
 //     foreignKey: 'taskId'
