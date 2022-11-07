@@ -12,7 +12,6 @@ export class User extends Model<InferCreationAttributes<User>, InferCreationAttr
     declare points: number;
     declare task: string;
     declare profileImg: string;
-    declare points: number;  
 
     
 }
