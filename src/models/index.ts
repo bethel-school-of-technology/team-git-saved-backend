@@ -1,13 +1,13 @@
 import { Sequelize } from "sequelize";
 import { User, UserFactory } from "./user";
-import { TaskFactory, Tasks } from "./tasks";
+import { TaskFactory, AssociateUserTasks } from "./tasks";
 import { HouseholdFactory } from "./household";
-import { DiscussionFactory } from "./discussion";
+import { DiscussionFactory, AssociateUserDiscussion } from "./discussion";
 import { RewardFactory } from "./reward";
 
 const dbName = "hometasticDb";
 const username = "root";
-const password = "password";
+const password = "123";
 
 const sequelize = new Sequelize(dbName, username, password, {
   host: "localhost",
@@ -20,11 +20,13 @@ UserFactory(sequelize);
 HouseholdFactory(sequelize);
 DiscussionFactory(sequelize);
 RewardFactory(sequelize);
+AssociateUserTasks();
+AssociateUserDiscussion();
 
-User.hasMany(Tasks, {
-    foreignKey: 'taskId'
-  });
-  Tasks.belongsTo(User);
+// User.hasMany(Tasks, {
+//     foreignKey: 'taskId'
+//   });
+//   Tasks.belongsTo(User);
 
 
 export const db = sequelize;

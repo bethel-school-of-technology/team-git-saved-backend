@@ -1,11 +1,12 @@
 import { DataTypes, InferAttributes, InferCreationAttributes, Model, Sequelize } from "sequelize";
+import { User } from "./user";
 
 export class Tasks extends Model<InferAttributes<Tasks>, InferCreationAttributes<Tasks>> {
     declare taskId: number;
     declare title: string;
     declare pointValue: number
+    declare userId: number
     declare completed: boolean;
-    
 }
 
 export function TaskFactory(sequelize: Sequelize) {
@@ -24,7 +25,10 @@ export function TaskFactory(sequelize: Sequelize) {
             type: DataTypes.INTEGER,
             allowNull: true
         },
-        
+        userId:{
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
         completed: {
             type: DataTypes.BOOLEAN,
             defaultValue: 0,
@@ -36,6 +40,9 @@ export function TaskFactory(sequelize: Sequelize) {
         tableName: "tasks",
         sequelize
     });
+}
 
-
+export function AssociateUserTasks() {
+    User.hasMany(Tasks, { foreignKey: 'userId' });
+    Tasks.belongsTo(User, { foreignKey: 'userId' });
 }
