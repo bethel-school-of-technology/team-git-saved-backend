@@ -11,6 +11,7 @@ export class User extends Model<InferCreationAttributes<User>, InferCreationAttr
     declare bio: string;
     declare points: number;
     declare task: string;
+    declare profileImg: string;
    
     
     
@@ -56,6 +57,10 @@ export function UserFactory(sequelize: Sequelize) {
         },
         
         task: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        profileImg: {
             type: DataTypes.STRING,
             allowNull: true
         }
