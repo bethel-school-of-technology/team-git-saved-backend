@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import { User, UserFactory } from "./user";
 import { TaskFactory, AssociateUserTasks } from "./tasks";
-import { HouseholdFactory } from "./household";
+import { AssociateUserHousehold, HouseholdFactory } from "./household";
 import { DiscussionFactory, AssociateUserDiscussion } from "./discussion";
 import { RewardFactory } from "./reward";
 
@@ -22,6 +22,7 @@ DiscussionFactory(sequelize);
 RewardFactory(sequelize);
 AssociateUserTasks();
 AssociateUserDiscussion();
+// AssociateUserHousehold();
 
 // User.hasMany(Tasks, {
 //     foreignKey: 'taskId'

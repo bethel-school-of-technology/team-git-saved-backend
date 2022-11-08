@@ -32,7 +32,7 @@ export function DiscussionFactory(sequelize: Sequelize) {
       },
       content: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       userId: {
         type: DataTypes.INTEGER,
