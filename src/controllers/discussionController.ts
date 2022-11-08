@@ -17,7 +17,7 @@ export const getDiscussion: RequestHandler = async (req, res) => {
     let discussionId = req.params.id;
 
     let discussionFound = await Discussion.findByPk(discussionId).then(response => {
-        res.status(200).json(discussionFound)
+        res.status(200).json(response)
     })
 }
 

@@ -34,7 +34,7 @@ export const createHousehold: RequestHandler = async (req, res) => {
     let household = req.body;
 
 
-    if (household.title) {
+    if (household.name) {
         try {
             let created = await Household.create(household)
             res.status(201).json(created)
