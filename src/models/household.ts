@@ -1,12 +1,20 @@
-import { DataTypes, InferAttributes, InferCreationAttributes, Model, Sequelize } from "sequelize";
+import {
+  DataTypes,
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+  Sequelize,
+} from "sequelize";
 import { User } from "./user";
 
-export class Household extends Model<InferAttributes<Household>, InferCreationAttributes<Household>> {
-    declare householdId: number;
-    declare name: string;
-    declare size: number;
-    declare userId: number;
-    
+export class Household extends Model<
+  InferAttributes<Household>,
+  InferCreationAttributes<Household>
+> {
+  declare householdId: number;
+  declare name: string;
+  declare size: number;
+  declare userId: number;
 }
 
 export function HouseholdFactory(sequelize: Sequelize) {
@@ -28,9 +36,8 @@ export function HouseholdFactory(sequelize: Sequelize) {
       },
       userId: {
         type: DataTypes.INTEGER,
-        allowNull: true
-      }
-
+        allowNull: true,
+      },
     },
     {
       freezeTableName: true,
@@ -40,6 +47,6 @@ export function HouseholdFactory(sequelize: Sequelize) {
   );
 }
 export function AssociateUserHousehold() {
-  Household.hasMany(User, { foreignKey: "userId" });
-  User.belongsTo(Household, { foreignKey: "userId" });
+  User.hasOne(Household, { foreignKey: "userId" });
+  Household.belongsTo(User, { foreignKey: "userId" });
 }

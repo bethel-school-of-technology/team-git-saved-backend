@@ -22,12 +22,11 @@ DiscussionFactory(sequelize);
 RewardFactory(sequelize);
 AssociateUserTasks();
 AssociateUserDiscussion();
-// AssociateUserHousehold();
+AssociateUserHousehold();
 
 // User.hasMany(Tasks, {
 //     foreignKey: 'taskId'
 //   });
 //   Tasks.belongsTo(User);
-
 
 export const db = sequelize;
