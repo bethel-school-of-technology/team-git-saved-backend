@@ -151,29 +151,3 @@ export const findUserTakss: RequestHandler = async (req, res, next) => {
     }
 }
 
-// Find User Household
-export const findUserHousehold: RequestHandler = async (req, res, next) => {
-  let user: User | null = await verifyUser(req);
-
-  if (!user) {
-      return res.status(403).send();
-  }
-
-  let foundHousehold: Household = req.body;
-  foundHousehold.userId = user.userId;
-
-  if (foundHousehold.name) {
-      let itemId = parseInt(req.params.userId);
-
-      const household = await Household.findAll({
-          where: {
-          userId: itemId
-          }
-      });
-
-      res.status(200).json(household);
-  }
-  else {
-      res.status(400).send();
-  }
-}

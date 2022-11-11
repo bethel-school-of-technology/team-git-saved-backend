@@ -6,6 +6,7 @@ export class User extends Model<InferCreationAttributes<User>, InferCreationAttr
     declare roleId: string;
     declare username: string;
     declare password: string;
+    declare householdName: string;
     declare name: string;
     declare bio: string;
     declare points: number;
@@ -34,6 +35,10 @@ export function UserFactory(sequelize: Sequelize) {
             
         },
         password: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        householdName: {
             type: DataTypes.STRING,
             allowNull: true
         },
