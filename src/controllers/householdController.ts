@@ -21,7 +21,7 @@ export const getHousehold: RequestHandler = async (req, res) => {
     let householdId = req.params.id;
 
     let householdFound = await Household.findByPk(householdId).then(response => {
-        res.status(200).json(householdFound)
+        res.status(200).json(response)
     })
 
 
@@ -96,3 +96,4 @@ export const updateHousehold: RequestHandler =async (req, res) => {
 
     
 }
+
