@@ -4,9 +4,10 @@ import { User } from "./user";
 export class Tasks extends Model<InferAttributes<Tasks>, InferCreationAttributes<Tasks>> {
     declare taskId: number;
     declare title: string;
-    declare pointValue: number
-    declare userId: number
+    declare pointValue: number;
+    declare userId: number;
     declare completed: boolean;
+    declare assignedTo: string;
 }
 
 export function TaskFactory(sequelize: Sequelize) {
@@ -25,7 +26,7 @@ export function TaskFactory(sequelize: Sequelize) {
             type: DataTypes.INTEGER,
             allowNull: true
         },
-        userId:{
+        userId: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
@@ -34,6 +35,11 @@ export function TaskFactory(sequelize: Sequelize) {
             defaultValue: 0,
             allowNull: true
         },
+        assignedTo: {
+            type: DataTypes.STRING,
+            allowNull: true
+
+        }
         
     }, {
         freezeTableName: true,
