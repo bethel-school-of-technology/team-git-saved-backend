@@ -6,7 +6,6 @@ export class Household extends Model<InferAttributes<Household>, InferCreationAt
     declare name: string;
     declare size: number;
     declare userId: number;
-    
 }
 
 export function HouseholdFactory(sequelize: Sequelize) {
