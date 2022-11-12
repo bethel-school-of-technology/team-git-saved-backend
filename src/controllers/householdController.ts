@@ -32,6 +32,7 @@ export const getHousehold: RequestHandler = async (req, res) => {
 export const createHousehold: RequestHandler = async (req, res) => {
 
     let household = req.body;
+    console.log(household);
 
 
     if (household.name) {
@@ -39,10 +40,12 @@ export const createHousehold: RequestHandler = async (req, res) => {
             let created = await Household.create(household)
             res.status(201).json(created)
         } catch (err) {
+            console.log(household);
             res.status(400).send();
         }
     } else {
-        res.status(400).send();
+        console.log(household);
+        res.status(404).send();
     }
 
 

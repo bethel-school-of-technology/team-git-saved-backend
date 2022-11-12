@@ -25,5 +25,4 @@ AssociateUserDiscussion();
 AssociateHouseholdUsers();
 
 
-
 export const db = sequelize;
