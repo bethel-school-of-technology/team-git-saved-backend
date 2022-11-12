@@ -7,6 +7,7 @@ import {
   signUserToken,
   verifyUser,
 } from "../services/auth";
+import { Household } from "../models/household";
 
 // get all users
 
@@ -132,9 +133,9 @@ export const findUserTakss: RequestHandler = async (req, res, next) => {
         userId: itemId,
       },
     });
-
-    res.status(200).json(posts);
-  } else {
-    res.status(400).send();
-  }
-};
+        res.status(200).json(posts);
+    }
+    else {
+        res.status(400).send();
+    }
+}

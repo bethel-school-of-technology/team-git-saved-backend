@@ -34,7 +34,8 @@ export const createHousehold: RequestHandler = async (req, res) => {
     let household = req.body;
     console.log(household);
 
-    if (!household.name) {
+
+    if (household.name) {
         try {
             let created = await Household.create(household)
             res.status(201).json(created)
@@ -98,3 +99,4 @@ export const updateHousehold: RequestHandler =async (req, res) => {
 
     
 }
+
