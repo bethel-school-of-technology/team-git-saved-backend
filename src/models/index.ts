@@ -7,7 +7,7 @@ import { RewardFactory } from "./reward";
 
 const dbName = "hometasticDb";
 const username = "root";
-const password = "123";
+const password = "Password1!";
 
 const sequelize = new Sequelize(dbName, username, password, {
   host: "localhost",
@@ -27,6 +27,5 @@ AssociateUserDiscussion();
 //     foreignKey: 'taskId'
 //   });
 //   Tasks.belongsTo(User);
-
 
 export const db = sequelize;
